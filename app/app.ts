@@ -1,8 +1,9 @@
-// Regras de negócio.
-// Uma negociação não pode ser modificada depois de criada
-// Uma negociação obrigatoriamente tem uma data, uma quantidade e um valor
+import { NegociacaoController } from './controllers/negociacao-controller.js';
 
-import Negociacao from './models/negociacao.js';
+const controller = new NegociacaoController();
+const form = document.querySelector('.form');
 
-const negociacao = new Negociacao(new Date(), 10, 100);
-console.log(negociacao.volume);
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  controller.adiciona();
+});
