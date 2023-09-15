@@ -8,7 +8,7 @@ export class Negociacoes {
   }
 
   //O método ReadonlyArray permite a imutabilidade do array, preservando o array original.
-  lista(): ReadonlyArray<Negociacao> {
+  lista(): readonly Negociacao[] {
     return this.negociacoes;
   }
 }
