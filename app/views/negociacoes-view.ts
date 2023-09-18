@@ -18,23 +18,26 @@ export class NegociacoesView {
           ${model
             .lista()
             .map((negociacao: Negociacao) => {
+              const dataFormatada = negociacao.data.toLocaleDateString('pt-BR', {
+                day: 'numeric',
+                month: 'numeric',
+                year: 'numeric',
+              });
               return `
               <tr>
-                <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>   
-                <td>${negociacao.quantidade}</td> 
+                <td>${dataFormatada}</td>     
+                <td>${negociacao.quantidade}</td>  
                 <td>${negociacao.valor}</td> 
               </tr> 
             `;
             })
-            .join('')} 
+            .join('')}  
         </tbody>
       </table>
     `;
   }
 
   public update(model: Negociacoes): void {
-    const template = this.template(model);
-    console.log(template);
-    this.elemento.innerHTML = template;
+    this.elemento.innerHTML = this.template(model);
   }
 }

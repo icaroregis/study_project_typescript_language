@@ -19,7 +19,9 @@ export class NegociacaoController {
     criaNegociacao() {
         const exp = /-/g;
         const date = new Date(this.inputData.value.replace(exp, ','));
-        return new Negociacao(date, Number(this.inputQuantidade.value), Number(this.inputValor.value));
+        const quantidade = Number(this.inputQuantidade.value);
+        const valor = Number(this.inputValor.value);
+        return new Negociacao(date, quantidade, valor);
     }
     limparFormulario() {
         this.inputData.value = '';
