@@ -4,6 +4,7 @@
 export abstract class View<T> {
   constructor(
     public seletor: string,
+    //Só o pai no caso a classe pai e suas filhas podem ter acesso a uma variável protected. Vale o mesmo para um método.
     protected elemento: HTMLElement = document.querySelector(seletor),
   ) {}
 
@@ -12,5 +13,5 @@ export abstract class View<T> {
   }
 
   //quando o método abstrato é definido na classe pai obrigatoriamente ele deve ser definido nas classes filhas que herdarem dessa classe pai.
-  abstract template(model: T): string;
+  protected abstract template(model: T): string;
 }

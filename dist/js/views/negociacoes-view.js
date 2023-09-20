@@ -14,22 +14,24 @@ export class NegociacoesView extends View {
           ${model
             .lista()
             .map((negociacao) => {
-            const dataFormatada = negociacao.data.toLocaleDateString('pt-BR', {
-                day: 'numeric',
-                month: 'numeric',
-                year: 'numeric',
-            });
             return `
               <tr>
-                <td>${dataFormatada}</td>     
-                <td>${negociacao.quantidade}</td>  
+                <td>${this.formatarData(negociacao.data)}</td>      
+                <td>${negociacao.quantidade}</td>    
                 <td>${negociacao.valor}</td> 
               </tr> 
             `;
         })
-            .join('')}  
+            .join('')}   
         </tbody>
       </table>
     `;
+    }
+    formatarData(data) {
+        return data.toLocaleDateString('pt-BR', {
+            day: 'numeric',
+            month: 'numeric',
+            year: 'numeric',
+        });
     }
 }

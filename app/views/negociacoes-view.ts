@@ -3,7 +3,7 @@ import { Negociacoes } from '../models/negociacoes.js';
 import { View } from './view.js';
 
 export class NegociacoesView extends View<Negociacoes> {
-  public template(model: Negociacoes): string {
+  protected template(model: Negociacoes): string {
     return `
       <table class="table table-hover table-bordered"> 
         <thead>
@@ -17,22 +17,25 @@ export class NegociacoesView extends View<Negociacoes> {
           ${model
             .lista()
             .map((negociacao: Negociacao) => {
-              const dataFormatada = negociacao.data.toLocaleDateString('pt-BR', {
-                day: 'numeric',
-                month: 'numeric',
-                year: 'numeric',
-              });
               return `
               <tr>
-                <td>${dataFormatada}</td>     
-                <td>${negociacao.quantidade}</td>  
+                <td>${this.formatarData(negociacao.data)}</td>      
+                <td>${negociacao.quantidade}</td>    
                 <td>${negociacao.valor}</td> 
               </tr> 
             `;
             })
-            .join('')}  
+            .join('')}   
         </tbody>
       </table>
     `;
+  }
+
+  private formatarData(data: Date): string {
+    return data.toLocaleDateString('pt-BR', {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+    });
   }
 }
