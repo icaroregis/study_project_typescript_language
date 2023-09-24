@@ -6,15 +6,6 @@ export default class Negociacao {
     public readonly valor: number,
   ) {}
 
-  get volume(): number {
-    return this.quantidade * this.valor;
-  }
-
-  get data(): Date {
-    const data = new Date(this._data.getTime());
-    return data;
-  }
-
   public static criaDe(
     dataString: string,
     quantidadeString: string,
@@ -26,5 +17,14 @@ export default class Negociacao {
     const valor = Number(valorString);
 
     return new Negociacao(date, quantidade, valor);
+  }
+
+  get volume(): number {
+    return this.quantidade * this.valor;
+  }
+
+  get data(): Date {
+    const data = new Date(this._data.getTime());
+    return data;
   }
 }
