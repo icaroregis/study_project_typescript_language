@@ -6,10 +6,23 @@ export abstract class View<T> {
     public seletor: string,
     //Só o pai no caso a classe pai e suas filhas podem ter acesso a uma variável protected. Vale o mesmo para um método.
     protected elemento: HTMLElement = document.querySelector(seletor),
-  ) {}
+    private escapar: boolean = false,
+  ) {
+    if (escapar) {
+      this.escapar = escapar;
+    }
+  }
 
   public update(model: T): void {
-    this.elemento.innerHTML = this.template(model);
+    let template = this.template(model);
+
+    console.log(this.escapar);
+
+    if (this.escapar) {
+      template = template.replace(/<script>[\s\S]*?<script>/, '');
+    }
+
+    this.elemento.innerHTML = template;
   }
 
   //quando o método abstrato é definido na classe pai obrigatoriamente ele deve ser definido nas classes filhas que herdarem dessa classe pai.

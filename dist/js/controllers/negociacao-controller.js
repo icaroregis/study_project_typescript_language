@@ -4,7 +4,7 @@ import { Negociacoes } from '../models/negociacoes.js';
 import { MensagemView } from '../views/mensagem-view.js';
 import { NegociacoesView } from '../views/negociacoes-view.js';
 export class NegociacaoController {
-    constructor(inputData = document.querySelector('#data'), inputQuantidade = document.querySelector('#quantidade'), inputValor = document.querySelector('#valor'), negociacoes = new Negociacoes(), negociacoesView = new NegociacoesView('#negociacoesView'), mensagemView = new MensagemView('#mensagemView')) {
+    constructor(inputData = document.querySelector('#data'), inputQuantidade = document.querySelector('#quantidade'), inputValor = document.querySelector('#valor'), negociacoes = new Negociacoes(), negociacoesView = new NegociacoesView('#negociacoesView', true), mensagemView = new MensagemView('#mensagemView')) {
         this.inputData = inputData;
         this.inputQuantidade = inputQuantidade;
         this.inputValor = inputValor;
@@ -14,7 +14,7 @@ export class NegociacaoController {
         this.negociacoesView.update(this.negociacoes);
     }
     adiciona() {
-        const negociacao = this.criaNegociacao();
+        const negociacao = Negociacao.criaDe(this.inputData.value, String(this.inputQuantidade), String(this.inputValor));
         if (!this.ehDiaUtil(negociacao.data)) {
             return this.mensagemView.update('Apenas negociações em dias úteis são aceitas!');
         }
@@ -25,13 +25,6 @@ export class NegociacaoController {
     ehDiaUtil(date) {
         //o getDay retona o dia da semana. Começa com zero: Domingo e termina com seis: sábado.
         return date.getDay() > DiasDaSemana.DOMINGO && date.getDay() < DiasDaSemana.SABADO;
-    }
-    criaNegociacao() {
-        const exp = /-/g;
-        const date = new Date(this.inputData.value.replace(exp, ','));
-        const quantidade = Number(this.inputQuantidade.value);
-        const valor = Number(this.inputValor.value);
-        return new Negociacao(date, quantidade, valor);
     }
     limparFormulario() {
         this.inputData.value = '';

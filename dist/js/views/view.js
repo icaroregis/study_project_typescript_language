@@ -3,11 +3,20 @@
 export class View {
     constructor(seletor, 
     //Só o pai no caso a classe pai e suas filhas podem ter acesso a uma variável protected. Vale o mesmo para um método.
-    elemento = document.querySelector(seletor)) {
+    elemento = document.querySelector(seletor), escapar = false) {
         this.seletor = seletor;
         this.elemento = elemento;
+        this.escapar = escapar;
+        if (escapar) {
+            this.escapar = escapar;
+        }
     }
     update(model) {
-        this.elemento.innerHTML = this.template(model);
+        let template = this.template(model);
+        console.log(this.escapar);
+        if (this.escapar) {
+            template = template.replace(/<script>[\s\S]*?<script>/, '');
+        }
+        this.elemento.innerHTML = template;
     }
 }
