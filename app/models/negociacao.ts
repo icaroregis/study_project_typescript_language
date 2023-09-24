@@ -8,13 +8,13 @@ export default class Negociacao {
 
   public static criaDe(
     dataString: string,
-    quantidadeString: string,
-    valorString: string,
+    quantidadeString: number,
+    valorString: number,
   ): Negociacao {
     const exp = /-/g;
     const date = new Date(dataString.replace(exp, ','));
-    const quantidade = Number(quantidadeString);
-    const valor = Number(valorString);
+    const quantidade = quantidadeString;
+    const valor = valorString;
 
     return new Negociacao(date, quantidade, valor);
   }

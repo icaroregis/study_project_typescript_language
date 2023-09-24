@@ -10,7 +10,7 @@ export class NegociacaoController {
     private inputQuantidade = document.querySelector('#quantidade') as HTMLInputElement,
     private inputValor = document.querySelector('#valor') as HTMLInputElement,
     private negociacoes: Negociacoes = new Negociacoes(),
-    private negociacoesView = new NegociacoesView('#negociacoesView', true as any),
+    private negociacoesView = new NegociacoesView('#negociacoesView'),
     private mensagemView = new MensagemView('#mensagemView'),
   ) {
     this.negociacoesView.update(this.negociacoes);
@@ -19,8 +19,8 @@ export class NegociacaoController {
   public adiciona(): void {
     const negociacao = Negociacao.criaDe(
       this.inputData.value,
-      String(this.inputQuantidade),
-      String(this.inputValor),
+      Number(this.inputQuantidade.value),
+      Number(this.inputValor.value),
     );
 
     if (!this.ehDiaUtil(negociacao.data)) {

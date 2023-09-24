@@ -1,4 +1,3 @@
-//SERVE PARA ENUMERAR VALORES QUE NUNCA MUDARÃO
 export var DiasDaSemana;
 (function (DiasDaSemana) {
     DiasDaSemana[DiasDaSemana["DOMINGO"] = 0] = "DOMINGO";

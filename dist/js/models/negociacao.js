@@ -1,5 +1,4 @@
 export default class Negociacao {
-    //apesar de ser publico ninguém pode alterar porque é apenas leitura.
     constructor(_data, quantidade, valor) {
         this._data = _data;
         this.quantidade = quantidade;
@@ -8,8 +7,8 @@ export default class Negociacao {
     static criaDe(dataString, quantidadeString, valorString) {
         const exp = /-/g;
         const date = new Date(dataString.replace(exp, ','));
-        const quantidade = Number(quantidadeString);
-        const valor = Number(valorString);
+        const quantidade = quantidadeString;
+        const valor = valorString;
         return new Negociacao(date, quantidade, valor);
     }
     get volume() {
