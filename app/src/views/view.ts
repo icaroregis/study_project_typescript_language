@@ -1,6 +1,8 @@
 //Só View tem acesso a um propriedade privada e seus filhos no caso a quem nós extendermos. Nenhuma outra classe terá acesso a não ser as classes filhas.
 
 //A classe abstrata não pode ser criada uma instancia diretamente dela, só pode se o filho herda essa classe e se o filho for instanciado.
+import { logarTempoDeExecucao } from '../decorators/logarTempoDeExecucao.js';
+
 export abstract class View<T> {
   constructor(
     public seletor: string,
@@ -8,6 +10,7 @@ export abstract class View<T> {
     protected elemento: HTMLElement = document.querySelector(seletor) as HTMLElement,
   ) {}
 
+  @logarTempoDeExecucao()
   public update(model: T): void {
     this.elemento.innerHTML = this.template(model);
   }
