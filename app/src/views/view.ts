@@ -10,7 +10,7 @@ export abstract class View<T> {
     protected elemento: HTMLElement = document.querySelector(seletor) as HTMLElement,
   ) {}
 
-  @logarTempoDeExecucao()
+  @logarTempoDeExecucao(true)
   public update(model: T): void {
     this.elemento.innerHTML = this.template(model);
   }
