@@ -5,7 +5,7 @@ export abstract class View<T> {
   constructor(
     public seletor: string,
     //Só o pai no caso a classe pai e suas filhas podem ter acesso a uma variável protected. Vale o mesmo para um método.
-    protected elemento: HTMLElement = document.querySelector(seletor),
+    protected elemento: HTMLElement = document.querySelector(seletor) as HTMLElement,
   ) {}
 
   public update(model: T): void {
