@@ -1,13 +1,12 @@
-import Negociacao from './negociacao';
+import { Negociacao } from './negociacao.js';
 
 export class Negociacoes {
   private negociacoes: Negociacao[] = [];
 
-  public adiciona(negociacao: Negociacao): void {
+  public adiciona(negociacao: Negociacao) {
     this.negociacoes.push(negociacao);
   }
 
-  //O método ReadonlyArray permite a imutabilidade do array, preservando o array original.
   public lista(): readonly Negociacao[] {
     return this.negociacoes;
   }

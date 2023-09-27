@@ -4,44 +4,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { escape } from '../decorators/escape.js';
+import { escapar } from '../decorators/escapar.js';
 import { View } from './view.js';
 export class NegociacoesView extends View {
     template(model) {
         return `
-      <table class="table table-hover table-bordered"> 
-        <thead>
-          <tr>
-            <th>DATA</th> 
-            <th>QUANTIDADE</th>
-            <th>VALOR</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${model
-            .lista()
-            .map((negociacao) => {
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>DATA</th>
+                    <th>QUANTIDADE</th>
+                    <th>VALOR</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${model.lista().map(negociacao => {
             return `
-              <tr>
-                <td>${this.formatarData(negociacao.data)}</td>      
-                <td>${negociacao.quantidade}</td>    
-                <td>${negociacao.valor}</td> 
-              </tr> 
-            `;
-        })
-            .join('')}   
-        </tbody>
-      </table>
-    `;
+                        <tr>
+                            <td>${this.formatar(negociacao.data)}
+                            </td>
+                            <td>
+                                ${negociacao.quantidade}
+                            </td>
+                            <td>
+                                ${negociacao.valor}
+                            </td>
+                        </tr>
+                    `;
+        }).join('')}
+            </tbody>
+        </table>
+        `;
     }
-    formatarData(data) {
-        return data.toLocaleDateString('pt-BR', {
-            day: 'numeric',
-            month: 'numeric',
-            year: 'numeric',
-        });
+    formatar(data) {
+        return new Intl.DateTimeFormat()
+            .format(data);
     }
 }
 __decorate([
-    escape
+    escapar
 ], NegociacoesView.prototype, "template", null);

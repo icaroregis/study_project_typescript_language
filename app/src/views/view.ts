@@ -1,18 +1,23 @@
-//Só View tem acesso a um propriedade privada e seus filhos no caso a quem nós estendermos. Nenhuma outra classe terá acesso a não ser as classes filhas.
-
-//A classe abstrata não pode ser criada uma instancia diretamente dela, só pode se o filho herda essa classe e se o filho for instanciado.
+import { inspect } from '../decorators/inspect.js';
+import { logarTempoDeExecucao } from '../decorators/logar-tempo-de-execucao.js';
 
 export abstract class View<T> {
-  constructor(
-    public seletor: string,
-    //Só o pai no caso a classe pai e suas filhas podem ter acesso a uma variável protected. Vale o mesmo para um método.
-    protected elemento: HTMLElement = document.querySelector(seletor) as HTMLElement,
-  ) {}
 
-  public update(model: T): void {
-    this.elemento.innerHTML = this.template(model);
-  }
+    protected elemento: HTMLElement;
 
-  //quando o método abstrato é definido na classe pai obrigatoriamente ele deve ser definido nas classes filhas que herdarem dessa classe pai.
-  protected abstract template(model: T): string;
+    constructor(seletor: string) {
+        const elemento = document.querySelector(seletor);
+        if (elemento) {
+            this.elemento = elemento as HTMLElement;
+        } else {
+            throw Error(`Seletor ${seletor} não existe no DOM. Verifique`);
+        }
+    }
+
+    public update(model: T): void {
+        let template = this.template(model);
+        this.elemento.innerHTML = template;
+    }
+
+    protected abstract template(model: T): string;
 }
